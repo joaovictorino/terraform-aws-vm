@@ -15,6 +15,7 @@ provider "aws" {
 
 resource "aws_vpc" "vpc-aula" {
   cidr_block = "10.0.0.0/16"
+
   tags = {
     project = "aula"
   }
@@ -22,6 +23,7 @@ resource "aws_vpc" "vpc-aula" {
 
 resource "aws_internet_gateway" "igw-aula" {
   vpc_id = aws_vpc.vpc-aula.id
+  
   tags = {
     project = "aula"
   }
@@ -37,6 +39,7 @@ resource "aws_subnet" "sub-aula" {
   vpc_id                  = aws_vpc.vpc-aula.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
+  
   tags = {
     project = "aula"
   }
@@ -66,6 +69,7 @@ resource "aws_security_group" "sg-aula" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
   tags = {
     project = "aula"
   }
@@ -74,6 +78,7 @@ resource "aws_security_group" "sg-aula" {
 resource "aws_key_pair" "key-aula" {
   key_name   = "key-aula"
   public_key = file("id_rsa.pub")
+  
   tags = {
     project = "aula"
   }
