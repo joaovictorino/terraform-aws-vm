@@ -33,7 +33,7 @@ resource "aws_route" "rt-aula" {
   gateway_id             = aws_internet_gateway.igw-aula.id
 }
 
-resource "aws_subnet" "subnet-aula" {
+resource "aws_subnet" "sub-aula" {
   vpc_id                  = aws_vpc.vpc-aula.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
@@ -43,8 +43,8 @@ resource "aws_subnet" "subnet-aula" {
 }
 
 resource "aws_security_group" "sg-aula" {
-  name        = "sg_aula"
-  vpc_id      = aws_vpc.vpc-aula.id
+  name   = "sg_aula"
+  vpc_id = aws_vpc.vpc-aula.id
 
   ingress {
     from_port   = 22
@@ -80,11 +80,11 @@ resource "aws_key_pair" "key-aula" {
 }
 
 resource "aws_instance" "vm-aula" {
-  instance_type = "t2.micro"
-  ami = "ami-04751c628226b9b59"
-  key_name = aws_key_pair.key-aula.id
+  instance_type          = "t2.micro"
+  ami                    = "ami-04751c628226b9b59"
+  key_name               = aws_key_pair.key-aula.id
   vpc_security_group_ids = [aws_security_group.sg-aula.id]
-  subnet_id = aws_subnet.subnet-aula.id
+  subnet_id              = aws_subnet.sub-aula.id
 
   tags = {
     project = "aula"
