@@ -86,7 +86,7 @@ resource "aws_key_pair" "key-aula" {
 
 resource "aws_instance" "vm-aula" {
   instance_type          = "t2.micro"
-  ami                    = "ami-04751c628226b9b59"
+  ami                    = "ami-053b0d53c279acc90"
   key_name               = aws_key_pair.key-aula.id
   vpc_security_group_ids = [aws_security_group.sg-aula.id]
   subnet_id              = aws_subnet.sub-aula.id
